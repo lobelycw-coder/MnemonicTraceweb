@@ -20,4 +20,4 @@ RUN chmod +x install_and_run.sh
 
 # 5. Stream the Linux script directly to your Render website URL on port 10000
 EXPOSE 10000
-CMD ["ttyd", "-p", "10000", "-W", "-c", "admin:ChangeThisPassword123", "./install_and_run.sh"]
+CMD ["ttyd", "-p", "10000", "-W", "-c", "admin:Balogun90", "./install_and_run.sh"]
