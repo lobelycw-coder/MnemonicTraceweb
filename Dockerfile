@@ -15,7 +15,7 @@ RUN ARCH=$(uname -m) && \
     curl -fsSL "https://github.com/tsl0922/ttyd/releases/latest/download/ttyd.${BIN_ARCH}" -o /usr/local/bin/ttyd && \
     chmod +x /usr/local/bin/ttyd
 
-# 3. Pre-install Rust so native crypto/Solana wheels compile cleanly if needed
+# 3. Pre-install Rust so native packages build cleanly without prompts
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o /tmp/rustup.sh && \
     sh /tmp/rustup.sh -y --no-modify-path && \
     rm -f /tmp/rustup.sh
@@ -25,9 +25,8 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 COPY . /app
 WORKDIR /app
 
-# 5. Pre-install repository dependencies and the missing solana package
-RUN pip install --no-cache-dir -r requirements.txt && \
-    pip install --no-cache-dir solana
+# 5. Install solana so sol_utils.py finds it automatically
+RUN pip install --no-cache-dir solana
 
 # 6. Make the repository's Linux script executable
 RUN chmod +x install_and_run.sh
