@@ -33,4 +33,10 @@ RUN chmod +x install_and_run.sh
 
 # 7. Expose Render's default port and launch ttyd interactively
 EXPOSE 10000
-CMD ["ttyd", "-p", "10000", "-W", "bash", "-c", "./install_and_run.sh; exec bash"]
+CMD ["ttyd", "-p", "10000", "-W", \
+     "-t", "fontSize=15", \
+     "-t", "lineHeight=1.25", \
+     "-t", "cursorStyle=bar", \
+     "-t", "theme={\"background\":\"#0f172a\",\"foreground\":\"#e2e8f0\"}", \
+     "bash", "-c", "./install_and_run.sh; exec bash"]
+
