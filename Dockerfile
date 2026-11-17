@@ -1,7 +1,8 @@
 FROM python:3.11-slim
 
-# 1. Install curl and build tools via apt (skip ttyd since it isn't in default apt)
+# 1. Install HTTPS certificates, curl, and build tools
 RUN apt-get update && apt-get install -y \
+    ca-certificates \
     curl \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
@@ -15,7 +16,9 @@ RUN ARCH=$(uname -m) && \
     chmod +x /usr/local/bin/ttyd
 
 # 3. Pre-install Rust so install_and_run.sh doesn't pause for prompts
-RUN curl --proto '=https' --tlsv1.2 -sSf https://rustup.rs | sh -s -- -y
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -o /tmp/rustup.sh && \
+    sh /tmp/rustup.sh -y --no-modify-path && \
+    rm -f /tmp/rustup.sh
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 # 4. Copy all untouched repository files into the container
@@ -25,6 +28,6 @@ WORKDIR /app
 # 5. Make the repository's Linux script executable
 RUN chmod +x install_and_run.sh
 
-# 6. Start ttyd on Render's port 10000
+# 6. Expose Render's default port and launch ttyd interactively
 EXPOSE 10000
 CMD ["ttyd", "-p", "10000", "-W", "bash", "-c", "./install_and_run.sh; exec bash"]
