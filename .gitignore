@@ -1,4 +1,4 @@
-# Environment variables and secrets
+# Secrets and environment files
 .env
 .env.*
 !.env.example
@@ -24,7 +24,7 @@ dist/
 build/
 *.egg-info/
 
-# Editors and operating systems
+# Editors and OS
 .vscode/
 .idea/
 .DS_Store
@@ -32,7 +32,7 @@ Thumbs.db
 *.swp
 *.swo
 
-# Node / Next.js
+# Node and frontend build output
 node_modules/
 .next/
 out/
@@ -41,7 +41,7 @@ npm-debug.log*
 pnpm-debug.log*
 yarn-debug.log*
 
-# Generated datasets, shards, model weights, and local artifacts
+# Local datasets, generated shards, and artifacts
 data/
 datasets/
 shards/
@@ -52,7 +52,7 @@ models/*.onnx
 *.safetensors
 *.weights
 
-# Logs, temporary files, databases, and backups
+# Logs, temporary files, local DBs, and backups
 *.log
 logs/
 tmp/
@@ -64,9 +64,9 @@ temp/
 *.sql.gz
 backups/
 
-# CUDA build output
-cuda/*.o
-cuda/*.obj
-cuda/*.ptx
-cuda/*.cubin
-cuda/*.fatbin
+# CUDA build artifacts
+*.o
+*.obj
+*.ptx
+*.cubin
+*.fatbin

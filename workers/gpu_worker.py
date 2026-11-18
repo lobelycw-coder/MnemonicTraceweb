@@ -1,1 +1,1 @@
-"""GPU worker placeholder; no job processing is implemented."""
+"""Optional GPU worker placeholder; no GPU work is implemented."""

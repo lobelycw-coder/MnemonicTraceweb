@@ -1,16 +1,22 @@
-# Seedhunter — Architecture Skeleton
+# MnemonicTrace — Architecture Scaffold
 
-Architecture-only scaffold; application logic is intentionally not implemented.
+This repository contains a structure-only scaffold for a modular Python service. The application logic is intentionally unimplemented.
 
-- core/: Python module placeholders and model assets
-- cuda/: CUDA source placeholders
-- workers/: CPU/GPU worker placeholders
-- pipeline/: data-pipeline placeholders
-- api/: FastAPI/database/model placeholders
-- web/: Next.js dashboard scaffold
-- miniapp/: Telegram Mini App scaffold
-- infra/: container placeholders
+## Architecture
 
-No application commands are wired up yet. Implement and review each component before running or deploying it.
+- `domain/`: pure domain types and rules; no I/O or infrastructure imports
+- `ports/`: abstract contracts for data sources, storage, and optional acceleration
+- `adapters/`: replaceable infrastructure integrations
+- `workers/`: worker orchestration placeholders
+- `pipeline/`: shard manifest and scheduler placeholders
+- `api/`: FastAPI entry point and dependency wiring placeholder
+- `web/`: static frontend placeholder intended for separate hosting
+- `miniapp/`: Telegram Mini App placeholder
+- `infra/`: container and local orchestration placeholders
+- `tests/`: test-first placeholders
 
-Never commit real secrets, recovery phrases, private keys, access tokens, production datasets, or generated recovery material. Use local environment variables and synthetic test fixtures only.
+No domain algorithms, scanning logic, derivation code, network clients, or worker behavior is implemented. Add reviewed tests before implementation.
+
+## Local configuration
+
+Copy `.env.example` to `.env` and use development-only values. Do not commit secrets, wallet recovery phrases, private keys, access tokens, or sensitive datasets.

@@ -1,6 +1,0 @@
-{
-  "name": "seedhunter-web",
-  "private": true,
-  "version": "0.1.0",
-  "description": "Architecture-only scaffold; dependencies and scripts are not configured."
-}
