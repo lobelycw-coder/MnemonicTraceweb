@@ -1,7 +1,7 @@
 from functools import lru_cache
-from bip_utils import (
-    Bip39SeedGenerator, Bip44, Bip44Coins, Bip44Changes, Bip49, Bip84,
-)
+
+from bip_utils import Bip39SeedGenerator, Bip44, Bip44Changes, Bip44Coins
+
 from domain.models import Candidate
 
 CHAIN_REGISTRY: dict[str, object] = {
@@ -10,14 +10,17 @@ CHAIN_REGISTRY: dict[str, object] = {
     "sol": Bip44Coins.SOLANA,
 }
 
+ADDRESSES_PER_SEED = 20
+
+
 @lru_cache(maxsize=4096)
 def derive_addresses(seed_phrase: str, chains: tuple[str, ...]) -> tuple[Candidate, ...]:
     seed_bytes = Bip39SeedGenerator(seed_phrase).Generate()
-    out = []
+    out: list[Candidate] = []
     for chain in chains:
         coin = CHAIN_REGISTRY[chain]
-        acct = Bip44.FromSeed(seed_bytes, coin).Purpose().Coin().Account(0)
-        for idx in range(20):
-            addr = acct.Change(Bip44Changes.CHAIN_EXT).AddressIndex(idx).PublicKey().ToAddress()
+        account = Bip44.FromSeed(seed_bytes, coin).Purpose().Coin().Account(0)
+        for idx in range(ADDRESSES_PER_SEED):
+            addr = account.Change(Bip44Changes.CHAIN_EXT).AddressIndex(idx).PublicKey().ToAddress()
             out.append(Candidate(chain=chain, address=addr, seed=seed_phrase, index=idx))
     return tuple(out)
