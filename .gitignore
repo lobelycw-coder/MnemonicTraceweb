@@ -1,0 +1,72 @@
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+.secret/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+coverage/
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+
+# Generated datasets, shards, model weights, and local artifacts
+data/
+datasets/
+shards/
+artifacts/
+models/*.bin
+models/*.pt
+models/*.onnx
+*.safetensors
+*.weights
+
+# Logs, temporary files, databases, and backups
+*.log
+logs/
+tmp/
+temp/
+*.sqlite
+*.sqlite3
+*.db
+*.dump
+*.sql.gz
+backups/
+
+# CUDA build output
+cuda/*.o
+cuda/*.obj
+cuda/*.ptx
+cuda/*.cubin
+cuda/*.fatbin
