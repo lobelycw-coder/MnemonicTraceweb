@@ -36,3 +36,6 @@ class EvmBalanceSource(BalanceSource):
                     raise
                 await asyncio.sleep(2**attempt)
         return 0
+        
+        async def close(self) -> None:
+        await self._client.aclose()
