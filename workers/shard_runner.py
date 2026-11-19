@@ -73,3 +73,7 @@ class ShardRunner:
                         balance=balance,
                     )
                 )
+                
+                async def close(self) -> None:
+        for source in self._balances.values():
+            await source.close()
