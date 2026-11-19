@@ -32,4 +32,4 @@ async def test_fail_returns_to_pending(store):
     shard = await store.claim("w1")
     await store.fail(shard.id, "boom")
     again = await store.claim("w2")
-    assert again.id == shard.id
+    assert again.id == shard.id 
