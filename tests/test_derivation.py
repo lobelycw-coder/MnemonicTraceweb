@@ -17,4 +17,4 @@ def test_known_seed_eth_address():
 def test_all_chains_derive():
     addrs = derive_addresses(KNOWN, ("eth", "sol", "btc"))
     assert {c.chain for c in addrs} == {"eth", "sol", "btc"}
-    assert len(addrs) == 60  # 20 per chain
+    assert len(addrs) == 60  # 20 per chain 
