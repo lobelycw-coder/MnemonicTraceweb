@@ -1,3 +1,5 @@
+from adapters.balance.btc_blockstream import BtcBalanceSource
+from domain.seeds import seed_at
 import asyncio
 import logging
 import os
@@ -18,6 +20,7 @@ CHAINS = ("eth", "sol", "btc")
 
 def build_balance_sources() -> dict[str, object]:
     return {
+        ""btc": BtcBalanceSource(),
         "eth": EvmBalanceSource(os.environ["ETHERSCAN_KEY"]),
         "sol": SolanaBalanceSource(os.environ["SOLANA_RPC"]),
     }
@@ -45,7 +48,7 @@ class ShardRunner:
                 await self._store.fail(shard.id, str(exc)[:250])
 
     async def _process(self, shard_id: int, start: int, end: int) -> None:
-        seeds = [f"shard-{shard_id}-seed-{i}" for i in range(start, end)]
+        seeds = [seed_at(i) for i in range(start, end)]
         candidates = await self._accel.derive_batch(seeds, CHAINS)
         for cand in candidates:
             source = self._balances.get(cand.chain)
